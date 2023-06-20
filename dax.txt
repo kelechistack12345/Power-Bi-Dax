@@ -1,0 +1,58 @@
+Full Name = Customer[First Name] & " " & Customer[ Last Name]
+
+Age Breakdown = IF(Customer[Age]>=55,"55+",
+         IF(Customer[Age]>=45,"45-54",
+         IF(Customer[Age]>=35,"34-44","18-34")))
+
+Month Of Year = // MM-YYYY 
+ FORMAT('Date'[Date],"MM-YYYY") //mmm -- jan // mmmm --- january
+
+
+Day of Week = WEEKDAY(TrainingSample2[SalesDate])
+
+Cost = TrainingSample2[UnitPrice] * TrainingSample2[OrderQty]
+
+Day = DAY(TrainingSample2[SalesDate])
+
+Day of Week = WEEKDAY(TrainingSample2[SalesDate])
+
+Month = FORMAT(TrainingSample2[SalesDate],"MM-YYYY")
+
+Month Name = FORMAT(TrainingSample2[SalesDate],"MMMM") 
+
+Profit = TrainingSample2[Sales]-TrainingSample2[Cost]
+
+Sales = TrainingSample2[ListPrice] * TrainingSample2[OrderQty]
+
+WeekNo = WEEKNUM(TrainingSample2[SalesDate])
+
+Year = YEAR([SalesDate]) 
+
+Week Day = FORMAT(TrainingSample2[SalesDate],"DDDD") OR Week Day = FORMAT(TrainingSample2[SalesDate],"DDD") 2007/2/7 2022/4/5
+
+Calendar = CALENDAR(DATE(2022,01,01),DATE(2023,06,04)) or Calendar = CALENDAR(DATE(2022,01,01),TODAY())
+
+Calendar = CALENDAR(MIN(Unicorn_Companies[Date Joined]),MAX(Unicorn_Companies[Date Joined]))
+
+Year = YEAR('Calendar'[Date])
+
+Day = DAY('Calendar'[Date])
+
+Year = FORMAT([Date],"yyyy")
+
+
+====calculated column====
+
+Over 1000 = IF(TrainingSample2[Sales]>1000,"Over 1000","Less 1000")
+
+
+
+=======Time Intelligence=======
+
+Sales btw 1 may 17 to 15 may 17 = CALCULATE([Total sales],DATESBETWEEN(TrainingSample2[SalesDate],"01/05/2017","15/05/2017"))
+
+Total 7 days sales = CALCULATE([Total sales],DATESBETWEEN(TrainingSample2[SalesDate],TODAY()-7,TODAY()))
+
+Total last 7 days sales = CALCULATE([Total sales],DATESINPERIOD(TrainingSample2[SalesDate],LASTDATE(TrainingSample2[SalesDate]),-7,DAY))
+
+Previous year sales = [Total sales]-CALCULATE([Total sales],PREVIOUSYEAR('Date Master'[Master Date]) )
